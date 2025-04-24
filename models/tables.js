@@ -5,7 +5,7 @@ require('dotenv').config();
 
 let Semester = 'September';
 
-let fileName = 'data/DRAFT_ EXAMINATION TIMETABLE -JANUARY 2025_.xlsx';
+let fileName = 'data/FINAL_ EXAMINATION TIMETABLE -JANUARY 2025_.xlsx';
 
 async function getSheets() {
   let sheets = [];
