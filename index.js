@@ -17,6 +17,7 @@ const express = require('express');
 const path = require('path');
 
 const app = express();
+const current_semester = "SEPTEMBER 2025";
 
 const server = http.createServer(app);
 
@@ -36,6 +37,7 @@ app.get('/', async (req, res, next) => {
     sheets: await getSheets(),
     items_list: [],
     clashing_units: [],
+    current_semester: current_semester,
   });
 });
 
@@ -79,6 +81,7 @@ app.get('/search', async (req, res, next) => {
       mySheets[campus_choice > 0 ? campus_choice - 1 : undefined] ||
       'ALL CAMPUSES',
     sheets: mySheets,
+    current_semester: current_semester,
     items_list: presentingData,
     clashing_units: findCollidingLessons(presentingData),
   });
@@ -103,6 +106,7 @@ app.post('/search', async (req, res, next) => {
     sheets: mySheets,
     items_list: presentingData,
     clashing_units: findCollidingLessons(presentingData),
+    current_semester: current_semester,
   });
 });
 
@@ -390,9 +394,8 @@ app.get('/admin', (req, res, next) => {
 app.post('/upload', async (req, res) => {
   // console.log(req);
   var storage = multer.diskStorage({
-    destination: `data/${new Date().getFullYear()}/${
-      req.body.semester || Semester.toUpperCase()
-    }-SEMESTER`,
+    destination: `data/${new Date().getFullYear()}/${req.body.semester || Semester.toUpperCase()
+      }-SEMESTER`,
 
     filename: function (req, file, callback) {
       callback(null, file.originalname);
@@ -420,14 +423,14 @@ app.post('/upload', async (req, res) => {
             fs.statSync(`data/${new Date().getFullYear()}/${folder}/${fila}`)
               .size < 1024
               ? fs.statSync(
-                  `data/${new Date().getFullYear()}/${folder}/${fila}`
-                ).size + ' KB'
+                `data/${new Date().getFullYear()}/${folder}/${fila}`
+              ).size + ' KB'
               : (
-                  fs.statSync(
-                    `data/${new Date().getFullYear()}/${folder}/${fila}`
-                  ).size /
-                  (1024 * 1024)
-                ).toFixed(2) + ' MB',
+                fs.statSync(
+                  `data/${new Date().getFullYear()}/${folder}/${fila}`
+                ).size /
+                (1024 * 1024)
+              ).toFixed(2) + ' MB',
         };
       });
       objArray.push(obj);
