@@ -17,7 +17,7 @@ const express = require('express');
 const path = require('path');
 
 const app = express();
-const current_semester = "SEPTEMBER 2025";
+const current_semester = "JANUARY 2026";
 
 const server = http.createServer(app);
 
