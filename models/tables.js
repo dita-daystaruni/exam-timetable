@@ -3,9 +3,9 @@ const xlsxFile = require('read-excel-file/node');
 require('dotenv').config();
 // let Semester = "August";
 
-let Semester = 'September';
+let Semester = 'January';
 
-let fileName = 'data/DRAFT_EXAMINATION TIMETABLE -SEPTEMBER 2025.xlsx';
+let fileName = 'data/FINAL_EXAMINATION TIMETABLE -JANUARY 2026.xlsx';
 
 async function getSheets() {
   let sheets = [];
@@ -77,7 +77,7 @@ async function getCourses(params, sheetNumber) {
   let differences = diffs(MAX_INDEX_NULL);
   let MAX_INDEX =
     MAX_INDEX_NULL[
-      differences.indexOf(differences.find((nonOne) => nonOne > 1))
+    differences.indexOf(differences.find((nonOne) => nonOne > 1))
     ];
 
   let time = [];
@@ -133,15 +133,15 @@ async function getCourses(params, sheetNumber) {
             day:
               index >= time[1]
                 ? getInterval(
-                    secondWeekDays,
-                    variables[index].indexOf(foundElement),
-                    secondWeekDays.length - 1
-                  ).eleme
+                  secondWeekDays,
+                  variables[index].indexOf(foundElement),
+                  secondWeekDays.length - 1
+                ).eleme
                 : getInterval(
-                    firstWeekDays,
-                    variables[index].indexOf(foundElement),
-                    firstWeekDays.length - 1
-                  ).eleme,
+                  firstWeekDays,
+                  variables[index].indexOf(foundElement),
+                  firstWeekDays.length - 1
+                ).eleme,
             time:
               index >= time[1]
                 ? variables[time[1]][variables[index].indexOf(foundElement)]
